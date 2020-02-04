@@ -5,6 +5,7 @@ set -o pipefail
 set -o xtrace
 
 SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+#shellcheck source=utils.sh
 source "${SCRIPT_ROOT}/utils.sh"
 
 ensureSet "${GOLANG_VERSION}" "GOLANG_VERSION" || exit 1

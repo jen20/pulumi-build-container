@@ -4,7 +4,8 @@ set -o errexit
 set -o pipefail
 set -o xtrace
 
-SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)"
+#shellcheck source=utils.sh
 source "${SCRIPT_ROOT}/utils.sh"
 
 ensureSet "${PYTHON_VERSION}" "PYTHON_VERSION" || exit 1
@@ -24,6 +25,5 @@ pip3 install --user "pipenv==${PIPENV_VERSION}"
 pip3 install --user "awscli==${AWSCLI_VERSION}"
 pip3 install --user "wheel==${WHEEL_VERSION}" "twine==${TWINE_VERSION}"
 
-apt-get clean
-apt-get autoclean
-rm -rf /var/lib/apt/lists/*
+#shellcheck source=cleanup.sh
+source "${SCRIPT_ROOT}/cleanup.sh"
